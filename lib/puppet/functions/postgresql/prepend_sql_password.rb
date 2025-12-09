@@ -4,8 +4,9 @@
 Puppet::Functions.create_function(:'postgresql::prepend_sql_password') do
   # @param password
   #   The clear text `password`
+  #   Accept both String and Sensitive[String]
   dispatch :default_impl do
-    required_param 'String', :password
+    required_param 'Variant[String, Sensitive[String]]', :password
     return_type 'String'
   end
   def default_impl(password)
